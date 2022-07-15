@@ -534,37 +534,29 @@
           <v-col
               cols="4"
           >
-            <div
 
-            >
-            <v-img title="Ventas corporativas" sizes="" srcset=""
+            <v-img title="Ventas corporativas" sizes="" srcset="" height="80%"
                    src="https://minisope.vtexassets.com/assets/vtex/assets-builder/minisope.store-theme/0.19.11/deals/img-deal-01___e5c7c57af02d93a6c6cfe62a4df896af.png"/>
-            </div>
-            <v-row
 
+            <v-row
                 align="center"
                 justify="space-around"
             >
               <v-btn text>
                 VENTAS CORPORATIVAS
               </v-btn>
-              <v-btn
-                  text
-                  color="primary"
-              >
-              </v-btn>
-
-              <v-divider
-                  inset
-                  color="black"
-                  vertical
-              ></v-divider>
 
             </v-row>
           </v-col>
 
+          <v-divider
+              inset
+              color="black"
+              vertical
+          ></v-divider>
+
           <v-col cols="4">
-            <v-img title="Preguntas frecuentes" sizes="" srcset=""
+            <v-img title="Preguntas frecuentes" sizes="" srcset="" height="80%"
                    src="https://minisope.vtexassets.com/assets/vtex.file-manager-graphql/images/13b44f59-1a53-4847-b1b2-d7e9b459b020___7fdaf968b091a5aefc925d676ecb668d.jpg"/>
             <v-row
                 align="center"
@@ -573,22 +565,18 @@
               <v-btn text>
                 PREGUNTAS FRECUENTES
               </v-btn>
-              <v-btn
-                  text
-                  color="primary"
-              >
 
-              </v-btn>
-              <v-divider
-                  color="black"
-                  vertical
-              ></v-divider>
             </v-row>
 
           </v-col>
 
-          <v-col cols="4">
-            <v-img title="Libro de reclamaciones" sizes="" srcset=""
+          <v-divider
+              color="black"
+              vertical
+          ></v-divider>
+
+          <v-col cols="4" >
+            <v-img title="Libro de reclamaciones" sizes="" srcset="" height="80%"
                    src="https://minisope.vtexassets.com/assets/vtex/assets-builder/minisope.store-theme/0.18.0/deals/img-deal-03___b2e5420f0b992e9d373413cfcf2c638d.png"/>
             <v-row
                 align="center"
@@ -596,12 +584,6 @@
             >
               <v-btn text>
                 LIBRO DE RECLAMACIONES
-              </v-btn>
-              <v-btn
-                  text
-                  color="primary"
-              >
-
               </v-btn>
             </v-row>
 
