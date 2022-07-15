@@ -375,7 +375,7 @@
 
     </v-container>
     <!--Catergoria Juguetes Slide groups para mostrar productos -->
-
+    <!--TEST-->
     <!--Catergoria Moda Slide groups para mostrar productos -->
 
     <v-container fluid style="background:rgba(245,241,241,0.93)">
