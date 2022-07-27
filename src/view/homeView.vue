@@ -4,6 +4,7 @@
     <!--Carrusel  imagenes-->
     <v-carousel hide-delimiters>
       <v-carousel-item
+
           v-for="(item,i) in items"
           :key="i"
           :src="item.src"
@@ -17,10 +18,13 @@
         <h1 class="text-center">No sabía lo que necesitaba</h1>
         <v-row>
           <v-col cols="3">
-            <v-img
-                title="Bolsas y Mochilas"
-                src="https://minisope.vtexassets.com/assets/vtex.file-manager-graphql/images/e1009d7d-f9cf-4232-a8fe-dd31755b2c5d___b9fdc839e1d60ea36cf9be7d06107193.webp"/>
-          </v-col>
+            <router-link to="https://www.miniso.pe/Papeleria" >
+              <v-img
+                  title="Bolsas y Mochilas"
+                  src="https://minisope.vtexassets.com/assets/vtex.file-manager-graphql/images/e1009d7d-f9cf-4232-a8fe-dd31755b2c5d___b9fdc839e1d60ea36cf9be7d06107193.webp"
+              />
+            </router-link>
+            </v-col>
 
           <v-col cols="3">
             <v-img
@@ -44,7 +48,15 @@
     <!--Cuerpo de imagenes cards-->
 
     <!--Slide groups para mostrar productos pagina principal-->
-    <AppSlider :productos="productos"/>
+    <div v-if="products == null">
+      <v-progress-circular
+          indeterminate
+          color="red"
+      ></v-progress-circular>
+    </div>
+    <div v-else>
+      <AppSlider :productos="products.getProductArray()"/>
+    </div>
     <!--Slide groups para mostrar productos pagina principal-->
 
     <!--Categorias Hogar Slide groups para mostrar productos por categoria-->
@@ -57,13 +69,21 @@
       <h1 class="text-center">No sabía lo que necesitaba</h1>
       <v-container>
         <v-row>
-          <v-col cols="4">
+          <v-col
+              cols="12"
+              sm="4"
+          >
             <v-img
                 title="Hogar"
+                height="100%"
                 src="https://minisope.vtexassets.com/assets/vtex.file-manager-graphql/images/c5ad1085-f9f8-4d55-a443-83d30fc98aca___f2c3a65571546c3ea08249fc35bb9d8e.jpg"
             />
           </v-col>
-          <v-col cols="8">
+          <v-col
+              md="8"
+              sm="8"
+              cols="12"
+          >
             <h1 class="text-center">Hogar ✨</h1>
             <v-slide-group
                 v-model="modal"
@@ -72,8 +92,12 @@
             >
               <div
                   style="display:flex !important; gap: 15px !important;">
+                <div v-if="responseproductsCat == null">
+
+                </div>
                 <v-slide-item
-                    v-for="(producto,i)  in productos"
+                    v-else
+                    v-for="(productocat,i)  in responseproductsCat.getProductArray()"
                     :key="i"
                 >
                   <v-card
@@ -92,12 +116,12 @@
                     </div>
                     <v-img
                         height="200"
-                        :src="producto.src"
+                        :src="'data:image/jpeg;charset=utf-8;base64,' +productocat.getProductImage()"
                     ></v-img>
 
                     <v-card-text>
                       <v-spacer></v-spacer>
-                      <div>{{producto.titulo}}</div>
+                      <div>{{productocat.getProductNombre()}}</div>
                     </v-card-text>
                     <v-card-text>
                       <v-chip-group
@@ -108,7 +132,7 @@
                             text
                             color="error"
                         >
-                          {{producto.precio}}
+                          S/{{productocat.getProductPrecio()}}
                         </v-btn>
 
                       </v-chip-group>
@@ -144,13 +168,21 @@
     <v-container fluid style="background:#ffffff">
       <v-container>
         <v-row>
-          <v-col cols="4">
+          <v-col
+              cols="12"
+              sm="4"
+          >
             <v-img
                 title="Salud y belleza"
+                height="100%"
                 src="https://minisope.vtexassets.com/assets/vtex.file-manager-graphql/images/aeacbcdc-fec9-4830-a677-e4abd6f3094c___236b8e90f53d9b874b0be625316f72b8.jpg"
             />
           </v-col>
-          <v-col cols="8">
+          <v-col
+              md="8"
+              sm="8"
+              cols="12"
+          >
             <h1 class="text-center">Salud y Belleza ✨</h1>
             <v-slide-group
                 v-model="modal"
@@ -159,8 +191,15 @@
             >
               <div
                   style="display:flex !important; gap: 15px !important;">
+                <div v-if="responseproductsSal == null">
+                  <v-progress-circular
+                      indeterminate
+                      color="primary"
+                  ></v-progress-circular>
+                </div>
                 <v-slide-item
-                    v-for="(producto,i)  in productos"
+                    v-else
+                    v-for="(productocat,i)  in responseproductsSal.getProductArray()"
                     :key="i"
                 >
                   <v-card
@@ -179,12 +218,12 @@
                     </div>
                     <v-img
                         height="200"
-                        :src="producto.src"
+                        :src="'data:image/jpeg;charset=utf-8;base64,' +productocat.getProductImage()"
                     ></v-img>
 
                     <v-card-text>
                       <v-spacer></v-spacer>
-                      <div>{{producto.titulo}}</div>
+                      <div>{{productocat.getProductNombre()}}</div>
                     </v-card-text>
                     <v-card-text>
                       <v-chip-group
@@ -195,7 +234,7 @@
                             text
                             color="error"
                         >
-                          {{producto.precio}}
+                          S/{{productocat.getProductPrecio()}}
                         </v-btn>
 
                       </v-chip-group>
@@ -229,7 +268,10 @@
     <!--Catergoria Tecnologia Slide groups para mostrar productos -->
 
     <v-container fluid style="background:rgba(245,241,241,0.93)">
+
+
       <h1 class="text-center">Tecnología 💻</h1>
+
       <v-slide-group
           v-model="modal"
           center-active
@@ -237,13 +279,18 @@
       >
         <div
             style="display:flex !important; gap: 15px !important;">
+          <div v-if="responseproductsTeg == null">
+
+          </div>
           <v-slide-item
-              v-for="(producto,i)  in productos"
+              v-else
+              v-for="(productocat,i)  in responseproductsTeg.getProductArray()"
               :key="i"
           >
             <v-card
                 class="mx-auto my-12 mx-5"
                 width="285"
+
             >
               <div class="d-flex justify-space-between px-2 py-2">
                 <v-btn
@@ -257,12 +304,12 @@
               </div>
               <v-img
                   height="200"
-                  :src="producto.src"
+                  :src="'data:image/jpeg;charset=utf-8;base64,' +productocat.getProductImage()"
               ></v-img>
 
               <v-card-text>
                 <v-spacer></v-spacer>
-                <div>{{producto.titulo}}</div>
+                <div>{{productocat.getProductNombre()}}</div>
               </v-card-text>
               <v-card-text>
                 <v-chip-group
@@ -273,7 +320,7 @@
                       text
                       color="error"
                   >
-                    {{producto.precio}}
+                    S/{{productocat.getProductPrecio()}}
                   </v-btn>
 
                 </v-chip-group>
@@ -297,7 +344,6 @@
           </v-slide-item>
         </div>
       </v-slide-group>
-
     </v-container>
     <!--Catergoria Tecnologia Slide groups para mostrar productos -->
 
@@ -312,8 +358,13 @@
       >
         <div
             style="display:flex !important; gap: 15px !important;">
+
+          <div v-if="responseproductsJug == null">
+
+          </div>
           <v-slide-item
-              v-for="(producto,i)  in productos"
+              v-else
+              v-for="(productocat,i)  in responseproductsJug.getProductArray()"
               :key="i"
           >
             <v-card
@@ -332,12 +383,12 @@
               </div>
               <v-img
                   height="200"
-                  :src="producto.src"
+                  :src="'data:image/jpeg;charset=utf-8;base64,' +productocat.getProductImage()"
               ></v-img>
 
               <v-card-text>
                 <v-spacer></v-spacer>
-                <div>{{producto.titulo}}</div>
+                <div>{{productocat.getProductNombre()}}</div>
               </v-card-text>
               <v-card-text>
                 <v-chip-group
@@ -348,7 +399,7 @@
                       text
                       color="error"
                   >
-                    {{producto.precio}}
+                    S/{{productocat.getProductPrecio()}}
                   </v-btn>
 
                 </v-chip-group>
@@ -387,8 +438,13 @@
       >
         <div
             style="display:flex !important; gap: 15px !important;">
+
+          <div v-if="responseproductsMod == null">
+
+          </div>
           <v-slide-item
-              v-for="(producto,i)  in productos"
+              v-else
+              v-for="(productocat,i)  in responseproductsMod.getProductArray()"
               :key="i"
           >
             <v-card
@@ -407,12 +463,12 @@
               </div>
               <v-img
                   height="200"
-                  :src="producto.src"
+                  :src="'data:image/jpeg;charset=utf-8;base64,' +productocat.getProductImage()"
               ></v-img>
 
               <v-card-text>
                 <v-spacer></v-spacer>
-                <div>{{producto.titulo}}</div>
+                <div>{{productocat.getProductNombre()}}</div>
               </v-card-text>
               <v-card-text>
                 <v-chip-group
@@ -423,7 +479,7 @@
                       text
                       color="error"
                   >
-                    {{producto.precio}}
+                    S/{{productocat.getProductPrecio()}}
                   </v-btn>
 
                 </v-chip-group>
@@ -451,10 +507,10 @@
     </v-container>
     <!--Catergoria Moda Slide groups para mostrar productos -->
 
-    <!--Catergoria Deporte Slide groups para mostrar productos -->
+    <!--Catergoria Cosmeticos Slide groups para mostrar productos -->
 
     <v-container fluid style="background:rgba(245,241,241,0.93)">
-      <h1 class="text-center">Deportes</h1>
+      <h1 class="text-center">Cosméticos</h1>
       <v-slide-group
           v-model="modal"
           center-active
@@ -462,8 +518,13 @@
       >
         <div
             style="display:flex !important; gap: 15px !important;">
+          <div v-if="responseproductsCos == null">
+
+          </div>
           <v-slide-item
-              v-for="(producto,i)  in productos"
+
+              v-else
+              v-for="(productocat,i)  in responseproductsCos.getProductArray()"
               :key="i"
           >
             <v-card
@@ -482,12 +543,12 @@
               </div>
               <v-img
                   height="200"
-                  :src="producto.src"
+                  :src="'data:image/jpeg;charset=utf-8;base64,' +productocat.getProductImage()"
               ></v-img>
 
               <v-card-text>
                 <v-spacer></v-spacer>
-                <div>{{producto.titulo}}</div>
+                <div>{{productocat.getProductNombre()}}</div>
               </v-card-text>
               <v-card-text>
                 <v-chip-group
@@ -498,7 +559,7 @@
                       text
                       color="error"
                   >
-                    {{producto.precio}}
+                    S/{{productocat.getProductPrecio()}}
                   </v-btn>
 
                 </v-chip-group>
@@ -524,7 +585,7 @@
       </v-slide-group>
 
     </v-container>
-    <!--Catergoria Deportes Slide groups para mostrar productos -->
+    <!--Catergoria Cosmeticos Slide groups para mostrar productos -->
 
     <!--Rutas para clientes -->
 
@@ -594,113 +655,19 @@
 
     </v-container>
     <!--Rutas para clientes -->
-
-    <!--Deja tu correo -->
-
-<v-container fluid style="background:#fadddd">
-  <v-container>
-    <v-row>
-      <v-col
-          cols="7"
-      >
-        <v-row
-            align="center"
-            justify="space-around"
-        >
-          <h1 class="text">¡Que no se te pase ni una!</h1>
-          <div>Deja tu correo y entérate de todo lo que pasa en Miniso antes que nadie. Tips, noticias, tendencias, promociones y más.</div>
-
-          <div>Al momento de enviar mi correo acepto los Términos y condiciones y el Aviso de privacidad</div>
-
-        </v-row>
-      </v-col>
-
-      <v-col cols="5">
-
-        <v-row
-            align="center"
-            justify="space-around"
-        >
-          <v-text-field
-              solo
-              label="hola@correo.com"
-          ></v-text-field>
-
-          <v-btn
-              color="#FFC9D3"
-          >
-            ENVIAR
-          </v-btn>
-
-        </v-row>
-      </v-col>
-
-      <v-col cols="4">
-        <v-row
-            align="center"
-            justify="space-around"
-        >
-
-        </v-row>
-      </v-col>
-
-    </v-row>
-  </v-container>
-
-</v-container>
-
-    <!--Deja tu correo -->
-
-    <!--Footer Miniso -->
-
-    <v-container fluid style="background:#1c1b1b">
-      <v-footer
-          dark
-          padless
-      >
-        <v-card
-            flat
-            tile
-            class="py-2 white--text text-center"
-        >
-          <v-card-text>
-            <v-btn
-                v-for="icon in icons"
-                :key="icon"
-                class="mx-4 white--text"
-                icon
-            >
-              <v-icon size="24px">
-                {{ icon }}
-              </v-icon>
-            </v-btn>
-          </v-card-text>
-
-          <v-card-text class="py-2 white--text text-center">
-
-            Miniso Perú. Todos los derechos reservados © 2021 | Términos y Condiciones | Aviso de Privacidad
-
-          </v-card-text>
-
-          <v-card-text class="py-2 white--text text-center">
-            Miniso.pe utiliza cookies para que tengas la mejor experiencia de navegación. Si sigues navegando entendemos que aceptas nuestra política de cookie.
-
-          </v-card-text>
-
-        </v-card>
-      </v-footer>
-    </v-container>
-
   </div>
 
 </template>
 
 <!--Script -->
 
-<script>
-import AppBar from "@/components/AppBar";
-import AppSlider from "@/components/AppSlider";
-import {defineComponent} from "@vue/composition-api";
+<script lang="ts">
+import AppBar from "../components/AppBar.vue";
+import AppSlider from "../components/AppSlider.vue";
+import {defineComponent, onMounted, Ref, ref} from "@vue/composition-api";
+import {productsServices} from '@/Services/Productos/ProductsService'
+import ProductModel from "@/models/Productos/ProductModel";
+import IProductos from "@/interfaces/Productos/IProductos";
 
 export default defineComponent({
   name: 'home',
@@ -708,15 +675,6 @@ export default defineComponent({
     AppBar,
     AppSlider
   },
-  data: () =>({
-  icons: [
-    'mdi-vuetify',
-    'mdi-security',
-    'mdi-credit-card',
-    'mdi-instagram',
-  ],
-
-  }),
 
   setup() {
     const modal = null
@@ -735,65 +693,72 @@ export default defineComponent({
         src: 'https://minisope.vtexassets.com/assets/vtex.file-manager-graphql/images/a7fc541f-6239-4675-b00e-e71cbf92854b___0e5a37e4a2052a26186b8888ba254ae9.jpg',
       },
     ]
-    const productos = [
-        {
-          src : 'https://minisope.vtexassets.com/arquivos/ids/195904-384-384?v=637914622171200000&width=384&height=384&aspect=true',
-          titulo : 'Banda de puntos negros para nariz - We Bare Bears',
-          precio: 'S/ 8.95'
-        },
-        {
-          src : 'https://minisope.vtexassets.com/arquivos/ids/184078-384-384?v=637807701861500000&width=384&height=384&aspect=true',
-          titulo : 'Mascarilla para los ojos de gel bambú charcoal 6 pares -  Miniso',
-          precio : 'S/ 8.95'
-        },
 
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      },
+    const products : Ref<ProductModel|null> = ref(null);
 
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      },
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      },
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      },
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      },
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      },
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      },
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      }
-    ]
+    const producto_categoria:Ref<IProductos[]|any> = ref(null);
+    const responseproductsCat : Ref<ProductModel|null> = ref(null);
+    const responseproductsSal : Ref<ProductModel|null> = ref(null);
+    const responseproductsTeg : Ref<ProductModel|null> = ref(null);
+    const responseproductsJug : Ref<ProductModel|null> = ref(null);
+    const responseproductsMod : Ref<ProductModel|null> = ref(null);
+    const responseproductsCos : Ref<ProductModel|null> = ref(null);
+
+
+    const  getProducts = async () => {
+
+      const response = await productsServices.getProducts()
+      products.value = new ProductModel(response)
+
+
+    }
+    const getProductsByCategory = async () =>{
+
+      const response = await productsServices.getProductsByCategory(1);
+      producto_categoria.value = response;
+      responseproductsCat.value = new ProductModel(producto_categoria.value)
+
+      const response1 = await productsServices.getProductsByCategory(2);
+      producto_categoria.value = response1;
+      responseproductsSal.value = new ProductModel(producto_categoria.value)
+
+      const response2 = await productsServices.getProductsByCategory(8);
+      producto_categoria.value = response2;
+      responseproductsTeg.value = new ProductModel(producto_categoria.value)
+
+      const response3 = await productsServices.getProductsByCategory(4);
+      producto_categoria.value = response3;
+      responseproductsJug.value = new ProductModel(producto_categoria.value)
+
+      const response4 = await productsServices.getProductsByCategory(3);
+      producto_categoria.value = response4;
+      responseproductsMod.value = new ProductModel(producto_categoria.value)
+
+      const response5 = await productsServices.getProductsByCategory(6);
+      producto_categoria.value = response5;
+      responseproductsCos.value = new ProductModel(producto_categoria.value)
+
+    }
+
+    onMounted( () => {
+      getProducts()
+      getProductsByCategory();
+    })
+
 
     return {
       items,
-      productos,
-      modal
+      modal,
+      products,
+      getProducts,
+      getProductsByCategory,
+      responseproductsCat,
+      responseproductsSal,
+      responseproductsTeg,
+      responseproductsJug,
+      responseproductsMod,
+      responseproductsCos
+
       }
 
     //...

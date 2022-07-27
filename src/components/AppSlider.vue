@@ -9,7 +9,6 @@
       >
         <div
             style="display:flex !important; gap: 15px !important;">
-
           <v-slide-item
               v-for="(producto,i) in productos"
               :key="i"
@@ -17,6 +16,8 @@
             <v-card
                 class="mx-auto my-12 mx-5"
                 width="285"
+                :to="'/detalle_producto/' + producto.producto_id"
+
             >
               <div class="d-flex justify-space-between px-2 py-2">
                 <v-btn
@@ -24,7 +25,7 @@
                     depressed
                     small
                 >
-                  -50%
+                  {{producto.producto_descuento}}%
                 </v-btn>
                 <v-btn
                     icon
@@ -36,11 +37,11 @@
               </div>
               <v-img
                   height="200"
-                  :src="producto.src"
-              ></v-img>
+                  :src="'data:image/jpeg;charset=utf-8;base64,' +producto.producto_img"
+              />
               <v-card-text>
                 <v-spacer></v-spacer>
-                <div>{{producto.titulo}}</div>
+                <div>{{producto.producto_nombre}}</div>
               </v-card-text>
               <v-card-text>
                 <v-chip-group
@@ -51,7 +52,7 @@
                       text
                       color="error"
                   >
-                    S/17.90
+                   <v-card-subtitle class="text-md-h6 text-sm-subtitle-1 font-weight-bold">S/{{ producto.precio_final }}</v-card-subtitle>
                   </v-btn>
 
                   <v-btn
@@ -59,7 +60,7 @@
                       disabled
                       class="text-decoration-line-through"
                   >
-                    {{producto.precio}}
+                   S/{{producto.producto_precio}}
                   </v-btn>
 
                 </v-chip-group>

@@ -17,7 +17,24 @@ const routes: RouteConfig[] = [
             default: () => import("@/view/homeView.vue")
         }
 
+    },
+
+    {
+        path: '/detalle_producto/:producto_id',
+        name: WebPages.PRODUCTDETAIL,
+        components: {
+            default: () => import("@/view/ProductosCard.vue")
+        }
+    },
+
+    {
+        path: '/categoria_producto/:categoria',
+        name: WebPages.PRODUCTGENE,
+        components: {
+            default: () => import("@/view/ProductosGeneral.vue")
+        }
     }
+
 
 ];
 

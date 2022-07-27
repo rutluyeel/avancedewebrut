@@ -3,7 +3,7 @@ export enum WebPages {
     TABLE                       = 'table',
     LOGIN                       = 'login',
     PRODUCTDETAIL               = 'productDetail',
-    PRODUCTCAR                  = 'productCar',
+    PRODUCTGENE                 = 'productGen',
     PRODUCTVIEW                 = 'product'
 }
 
