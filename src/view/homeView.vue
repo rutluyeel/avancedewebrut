@@ -132,7 +132,7 @@
                             text
                             color="error"
                         >
-                          S/{{productocat.getProductPrecio()}}
+                          <v-card-subtitle class="text-md-h6 text-sm-subtitle-1 font-weight-bold">S/{{productocat.getProductPrecio()}}</v-card-subtitle>
                         </v-btn>
 
                       </v-chip-group>
@@ -234,7 +234,7 @@
                             text
                             color="error"
                         >
-                          S/{{productocat.getProductPrecio()}}
+                          <v-card-subtitle class="text-md-h6 text-sm-subtitle-1 font-weight-bold">S/{{productocat.getProductPrecio()}}</v-card-subtitle>
                         </v-btn>
 
                       </v-chip-group>
@@ -320,7 +320,7 @@
                       text
                       color="error"
                   >
-                    S/{{productocat.getProductPrecio()}}
+                    <v-card-subtitle class="text-md-h6 text-sm-subtitle-1 font-weight-bold">S/{{productocat.getProductPrecio()}}</v-card-subtitle>
                   </v-btn>
 
                 </v-chip-group>
@@ -399,7 +399,7 @@
                       text
                       color="error"
                   >
-                    S/{{productocat.getProductPrecio()}}
+                    <v-card-subtitle class="text-md-h6 text-sm-subtitle-1 font-weight-bold">S/{{productocat.getProductPrecio()}}</v-card-subtitle>
                   </v-btn>
 
                 </v-chip-group>
@@ -479,7 +479,7 @@
                       text
                       color="error"
                   >
-                    S/{{productocat.getProductPrecio()}}
+                    <v-card-subtitle class="text-md-h6 text-sm-subtitle-1 font-weight-bold">S/{{productocat.getProductPrecio()}}</v-card-subtitle>
                   </v-btn>
 
                 </v-chip-group>
@@ -559,7 +559,7 @@
                       text
                       color="error"
                   >
-                    S/{{productocat.getProductPrecio()}}
+                    <v-card-subtitle class="text-md-h6 text-sm-subtitle-1 font-weight-bold">S/{{productocat.getProductPrecio()}}</v-card-subtitle>
                   </v-btn>
 
                 </v-chip-group>

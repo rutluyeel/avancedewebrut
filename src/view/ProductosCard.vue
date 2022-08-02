@@ -29,9 +29,19 @@
           <v-card-text>Miniso</v-card-text>
           <v-spacer></v-spacer>
 
-          <v-card-text>{{product.getProductNombre()}}</v-card-text>
+          <v-card-text>
 
-          <v-card-text>S/{{product.getProductPrecio()}}</v-card-text>
+            {{product.getProductNombre()}}
+
+          </v-card-text>
+
+          <v-card-text>
+            <v-card-subtitle
+                color="#E53935"
+                class="text-md-h6 text-sm-subtitle-1 font-weight-bold">
+              S/{{product.getProductPrecio()}}
+            </v-card-subtitle>
+          </v-card-text>
 
           <v-divider></v-divider>
 
@@ -72,7 +82,6 @@
           >
             COMPRAR AHORA
           </v-btn>
-
 
           <v-card flat>
             <v-card-text>
@@ -180,7 +189,7 @@
                     text
                     color="error"
                 >
-                  S/{{productocat.getProductPrecio()}}
+                  <v-card-subtitle class="text-md-h6 text-sm-subtitle-1 font-weight-bold">S/{{productocat.getProductPrecio()}}</v-card-subtitle>
                 </v-btn>
 
               </v-chip-group>
@@ -259,60 +268,6 @@ export default defineComponent({
       },
     ]
 
-    const productos = [
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/195904-384-384?v=637914622171200000&width=384&height=384&aspect=true',
-        titulo : 'Banda de puntos negros para nariz - We Bare Bears',
-        precio: 'S/ 8.95'
-      },
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/184078-384-384?v=637807701861500000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel bambú charcoal 6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      },
-
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      },
-
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      },
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      },
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      },
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      },
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      },
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      },
-      {
-        src : 'https://minisope.vtexassets.com/arquivos/ids/158472-384-384?v=637389919064870000&width=384&height=384&aspect=true',
-        titulo : 'Mascarilla para los ojos de gel orange  6 pares -  Miniso',
-        precio : 'S/ 8.95'
-      }
-    ]
 
     const products : Ref<DetailsModel|null> = ref(null);
 
@@ -347,7 +302,6 @@ export default defineComponent({
 
     return {
       items,
-      productos,
       modal,
       products,
       responseproductsJug,
